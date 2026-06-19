@@ -1,0 +1,844 @@
+<!-- Flashforge Filament Guide by CASK.exe (github.com/caskexe) -->
+<!-- Version 1.2 (19 Jun 2026) -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flashforge Filament Guide</title>
+		<style>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+				font-size: 13px;
+				background: #f0f2f5;
+				color: #1a1a2e;
+				padding: 32px 16px;
+			}
+
+			h1 {
+				text-align: center;
+				font-size: 1.8rem;
+				font-weight: 700;
+				letter-spacing: 0.02em;
+				color: #1a1a2e;
+				margin-bottom: 6px;
+			}
+
+			.subtitle {
+				text-align: center;
+				color: #666;
+				margin-bottom: 28px;
+				font-size: 0.85rem;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+			}
+
+			.table-wrap {
+				overflow-x: auto;
+				border-radius: 12px;
+				box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				min-width: 1100px;
+				background: #fff;
+			}
+
+			thead tr.col-headers th {
+				background: #1a1a2e;
+				color: #fff;
+				font-weight: 600;
+				font-size: 0.82rem;
+				letter-spacing: 0.04em;
+				text-align: center;
+				padding: 14px 10px 10px;
+				border-right: 1px solid #2e2e4a;
+				white-space: nowrap;
+			}
+
+			thead tr.col-headers th:first-child {
+				text-align: left;
+				min-width: 160px;
+				border-right: 2px solid #3a3a5c;
+			}
+
+			.filament-badge {
+				display: inline-block;
+				padding: 3px 10px;
+				border-radius: 20px;
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.03em;
+				margin-top: 4px;
+				color: #fff;
+			}
+
+			tr.section-header td {
+				background: #e8eaf6;
+				color: #3949ab;
+				font-weight: 700;
+				font-size: 0.78rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				padding: 8px 12px;
+				border-top: 2px solid #c5cae9;
+				border-bottom: 1px solid #c5cae9;
+			}
+
+			tbody tr.data-row td {
+				padding: 9px 10px;
+				text-align: center;
+				border-bottom: 1px solid #eee;
+				border-right: 1px solid #eee;
+				vertical-align: middle;
+				font-size: 0.8rem;
+				color: #333;
+			}
+
+			tbody tr.data-row td:first-child {
+				text-align: left;
+				font-weight: 600;
+				color: #1a1a2e;
+				background: #fafafa;
+				padding-left: 16px;
+				border-right: 2px solid #ddd;
+				white-space: nowrap;
+			}
+
+			tbody tr.data-row:nth-child(even) td:not(:first-child) {
+				background: #fafbff;
+			}
+
+			tbody tr.data-row:hover td {
+				background: #f0f4ff;
+			}
+
+			.tick {
+				color: #2e7d32;
+				font-size: 1.1rem;
+			}
+			.cross {
+				color: #c62828;
+				font-size: 1.1rem;
+			}
+			.na {
+				color: #aaa;
+				font-style: italic;
+			}
+
+			.req {
+				color: #e65100;
+				font-weight: 700;
+				font-size: 0.75rem;
+			}
+			.not-req {
+				color: #888;
+				font-size: 0.75rem;
+			}
+
+			.app-tag {
+				display: inline-block;
+				background: #e8f5e9;
+				color: #2e7d32;
+				border: 1px solid #a5d6a7;
+				border-radius: 10px;
+				padding: 2px 7px;
+				font-size: 0.72rem;
+				margin: 2px 1px;
+				white-space: nowrap;
+			}
+
+			.enc-yes {
+				color: #1565c0;
+				font-weight: 700;
+			}
+			.enc-no {
+				color: #999;
+			}
+
+			.scroll-hint {
+				text-align: center;
+				color: #999;
+				font-size: 0.75rem;
+				margin-top: 10px;
+			}
+
+			.badge-pla {
+				background: #42a5f5;
+			}
+			.badge-plapro {
+				background: #1e88e5;
+			}
+			.badge-hspla {
+				background: #1565c0;
+			}
+			.badge-abs {
+				background: #ef5350;
+			}
+			.badge-abspro {
+				background: #c62828;
+			}
+			.badge-petg {
+				background: #66bb6a;
+			}
+			.badge-petgpro {
+				background: #2e7d32;
+			}
+			.badge-asa {
+				background: #ff7043;
+			}
+			.badge-flex {
+				background: #ab47bc;
+			}
+			.badge-placf {
+				background: #5c6bc0;
+			}
+			.badge-petgcf {
+				background: #00897b;
+			}
+
+			/* ── Print controls bar ── */
+			.print-controls {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 16px;
+				margin-bottom: 20px;
+				flex-wrap: wrap;
+			}
+
+			.theme-group {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				background: #e8eaf6;
+				border: 2px solid #c5cae9;
+				border-radius: 10px;
+				padding: 6px 10px;
+			}
+
+			.controls-label {
+				font-size: 0.75rem;
+				font-weight: 600;
+				color: #555;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				white-space: nowrap;
+				padding-right: 4px;
+				border-right: 1px solid #c5cae9;
+				margin-right: 2px;
+			}
+
+			/* Theme toggle buttons */
+			.theme-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				padding: 6px 14px;
+				border-radius: 6px;
+				font-size: 0.82rem;
+				font-weight: 600;
+				cursor: pointer;
+				border: 2px solid transparent;
+				transition:
+					background 0.15s,
+					border-color 0.15s,
+					color 0.15s;
+				background: transparent;
+				color: #3949ab;
+			}
+
+			.theme-btn:hover {
+				background: #c5cae9;
+			}
+
+			.theme-btn.active {
+				background: #1a1a2e;
+				color: #fff;
+				border-color: #1a1a2e;
+			}
+
+			/* Dedicated print button — visually distinct */
+			.do-print-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 7px;
+				padding: 8px 20px;
+				border-radius: 8px;
+				font-size: 0.85rem;
+				font-weight: 700;
+				cursor: pointer;
+				border: 2px solid #1a1a2e;
+				background: #1a1a2e;
+				color: #fff;
+				transition:
+					background 0.15s,
+					color 0.15s;
+				letter-spacing: 0.02em;
+			}
+
+			.do-print-btn:hover {
+				background: #3949ab;
+				border-color: #3949ab;
+			}
+
+			/* ── Colour print theme ──────────────────────────────────────── */
+			/* ── Low-ink print theme ─────────────────────────────────────── */
+			body.theme-lowink {
+				background: #fff;
+				color: #000;
+			}
+
+			body.theme-lowink h1 {
+				color: #000;
+			}
+
+			body.theme-lowink .subtitle {
+				color: #444;
+			}
+
+			body.theme-lowink thead tr.col-headers th {
+				background: #fff;
+				color: #000;
+				border-right: 1px solid #000;
+				border-bottom: 2px solid #000;
+			}
+
+			body.theme-lowink thead tr.col-headers th:first-child {
+				border-right: 2px solid #000;
+			}
+
+			body.theme-lowink .filament-badge {
+				background: none !important;
+				color: #000;
+				border: 1px solid #000;
+				font-size: 0.75rem;
+			}
+
+			body.theme-lowink tr.section-header td {
+				background: #fff;
+				color: #000;
+				border-top: 2px solid #000;
+				border-bottom: 1px solid #000;
+				font-weight: 700;
+			}
+
+			body.theme-lowink tbody tr.data-row td {
+				background: #fff !important;
+				color: #000;
+				border-bottom: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+			}
+
+			body.theme-lowink tbody tr.data-row td:first-child {
+				background: #fff !important;
+				border-right: 2px solid #999;
+			}
+
+			/* Striping: subtle grey instead of blue tint */
+			body.theme-lowink tbody tr.data-row:nth-child(even) td {
+				background: #f5f5f5 !important;
+			}
+
+			/* Hover: nothing flashy */
+			body.theme-lowink tbody tr.data-row:hover td {
+				background: #eee !important;
+			}
+
+			body.theme-lowink .tick {
+				color: #000;
+			}
+
+			body.theme-lowink .cross {
+				color: #000;
+			}
+
+			body.theme-lowink .na {
+				color: #666;
+			}
+
+			body.theme-lowink .app-tag {
+				background: #fff;
+				color: #000;
+				border: 1px solid #999;
+			}
+
+			body.theme-lowink .table-wrap {
+				box-shadow: none;
+				border: 1px solid #000;
+			}
+
+			body.theme-lowink .enc-yes {
+				color: #000;
+			}
+
+			body.theme-lowink .enc-no {
+				color: #666;
+			}
+
+			/* ── Colour print theme (default) ────────────────────────────── */
+			/* Force background colours and images to render when printing.   */
+			/* Without this, browsers strip backgrounds by default.           */
+			@media print {
+				/* Hide the controls bar — not needed on paper */
+				.print-controls {
+					display: none;
+				}
+			}
+
+			/* Applied to <html> and <body> when colour theme is active,      */
+			/* so colour printing works regardless of browser print settings. */
+			@media print {
+				/* Only apply forced colours when NOT in low-ink mode */
+				body:not(.theme-lowink) {
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+					color-adjust: exact;
+					background: #f0f2f5;
+				}
+
+				/* Ensure the table stays white */
+				body:not(.theme-lowink) table {
+					background: #fff;
+				}
+
+				/* Preserve dark navy header row */
+				body:not(.theme-lowink) thead tr.col-headers th {
+					background: #1a1a2e !important;
+					color: #fff !important;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				/* Preserve coloured filament badges */
+				body:not(.theme-lowink) .filament-badge {
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+					color: #fff !important;
+				}
+
+				/* Preserve individual badge colours */
+				body:not(.theme-lowink) .badge-pla    { background: #42a5f5 !important; }
+				body:not(.theme-lowink) .badge-plapro { background: #1e88e5 !important; }
+				body:not(.theme-lowink) .badge-hspla  { background: #1565c0 !important; }
+				body:not(.theme-lowink) .badge-abs    { background: #ef5350 !important; }
+				body:not(.theme-lowink) .badge-abspro { background: #c62828 !important; }
+				body:not(.theme-lowink) .badge-petg   { background: #66bb6a !important; }
+				body:not(.theme-lowink) .badge-petgpro{ background: #2e7d32 !important; }
+				body:not(.theme-lowink) .badge-asa    { background: #ff7043 !important; }
+				body:not(.theme-lowink) .badge-flex   { background: #ab47bc !important; }
+				body:not(.theme-lowink) .badge-placf  { background: #5c6bc0 !important; }
+				body:not(.theme-lowink) .badge-petgcf { background: #00897b !important; }
+
+				/* Preserve section header rows (blue-tinted) */
+				body:not(.theme-lowink) tr.section-header td {
+					background: #e8eaf6 !important;
+					color: #3949ab !important;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				/* Preserve zebra striping on data rows */
+				body:not(.theme-lowink) tbody tr.data-row:nth-child(even) td:not(:first-child) {
+					background: #fafbff !important;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				/* Preserve the sticky first-column background */
+				body:not(.theme-lowink) tbody tr.data-row td:first-child {
+					background: #fafafa !important;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				/* Preserve app-tag green pill background */
+				body:not(.theme-lowink) .app-tag {
+					background: #e8f5e9 !important;
+					color: #2e7d32 !important;
+					border: 1px solid #a5d6a7 !important;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				/* Keep tick/cross/na colours */
+				body:not(.theme-lowink) .tick { color: #2e7d32 !important; }
+				body:not(.theme-lowink) .cross { color: #c62828 !important; }
+				body:not(.theme-lowink) .na    { color: #aaa !important; }
+
+				/* Drop the box-shadow (doesn't render in print anyway) */
+				body:not(.theme-lowink) .table-wrap {
+					box-shadow: none;
+				}
+
+				/* Avoid breaking table rows across pages where possible */
+				tbody tr {
+					page-break-inside: avoid;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Flashforge Filament Guide</h1>
+		<p class="subtitle">Technical parameters &amp; print settings guide / cheatsheet thingo</p>
+
+		<!-- ── Print controls ── -->
+		<div class="print-controls">
+			<!-- Theme selector -->
+			<div class="theme-group">
+				<span class="controls-label">Print theme</span>
+				<button class="theme-btn active" id="btn-colour" onclick="setTheme('colour')">🎨 Colour</button>
+				<button class="theme-btn" id="btn-lowink" onclick="setTheme('lowink')">⬜ Low Ink</button>
+			</div>
+			<!-- Print trigger -->
+			<button class="do-print-btn" onclick="window.print()">🖨️ Print</button>
+		</div>
+
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr class="col-headers">
+						<th>Parameter</th>
+						<th><span class="filament-badge badge-pla">PLA</span></th>
+						<th><span class="filament-badge badge-plapro">PLA Pro</span></th>
+						<th><span class="filament-badge badge-hspla">HS PLA</span></th>
+						<th><span class="filament-badge badge-abs">ABS</span></th>
+						<th><span class="filament-badge badge-abspro">ABS Pro</span></th>
+						<th><span class="filament-badge badge-petg">PETG</span></th>
+						<th><span class="filament-badge badge-petgpro">PETG Pro</span></th>
+						<th><span class="filament-badge badge-asa">ASA</span></th>
+						<th><span class="filament-badge badge-flex">Flexible</span></th>
+						<th><span class="filament-badge badge-placf">PLA CF</span></th>
+						<th><span class="filament-badge badge-petgcf">PETG CF</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="section-header">
+						<td colspan="12">Filament Technical Parameters</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Tensile Strength</td>
+						<td>45-49 MPa</td>
+						<td>45.5-49 MPa</td>
+						<td>50-60 MPa</td>
+						<td>35-40 MPa</td>
+						<td>33-37 MPa</td>
+						<td>40-45 MPa</td>
+						<td>35-40 MPa</td>
+						<td>42-45 MPa</td>
+						<td>15-20 MPa</td>
+						<td>40-45 MPa</td>
+						<td>40-43 MPa</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Flexural Strength</td>
+						<td>69-75 MPa</td>
+						<td>73-76 MPa</td>
+						<td>75-79 MPa</td>
+						<td>65-70 MPa</td>
+						<td>65-67 MPa</td>
+						<td>50-55 MPa</td>
+						<td>45-50 MPa</td>
+						<td>75-79 MPa</td>
+						<td>&lt;10 MPa</td>
+						<td>85-95 MPa</td>
+						<td>75-85 MPa</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Water Absorption <small>(equilibrium in water, 23°C)</small></td>
+						<td>&lt;0.3</td>
+						<td>&lt;0.3</td>
+						<td>&lt;0.3</td>
+						<td>1</td>
+						<td>1</td>
+						<td>&lt;0.2</td>
+						<td>&lt;0.2</td>
+						<td>1</td>
+						<td>0.5</td>
+						<td>0.5</td>
+						<td>0.8</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Soluble with Common Solvents</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td>Soluble in acetone</td>
+						<td>Soluble in acetone</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="section-header">
+						<td colspan="12">Print Setting Parameters</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Print with Enclosure</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Nozzle Size</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>All sizes</td>
+						<td>0.6 / 0.8mm</td>
+						<td>0.6 / 0.8mm</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Nozzle Temperature</td>
+						<td>190-220°C</td>
+						<td>190-220°C</td>
+						<td>190-220°C</td>
+						<td>220-240°C</td>
+						<td>220-240°C</td>
+						<td>220-240°C</td>
+						<td>220-240°C</td>
+						<td>240-260°C</td>
+						<td>190-230°C</td>
+						<td>200-230°C</td>
+						<td>230-250°C</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Bed Temperature</td>
+						<td>25-60°C</td>
+						<td>25-60°C</td>
+						<td>25-60°C</td>
+						<td>100-110°C</td>
+						<td>80-100°C</td>
+						<td>70-80°C</td>
+						<td>70-80°C</td>
+						<td>100-120°C</td>
+						<td>25-60°C</td>
+						<td>25-60°C</td>
+						<td>60-80°C</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Hardened Nozzle Required</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Cooling Fan Required</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Normal Print Speed</td>
+						<td>40-60 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>60-150 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>20-40 mm/s</td>
+						<td>40-60 mm/s</td>
+						<td>40-60 mm/s</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Printable with Glass Bed</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Printable with PEI Plate</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Printable with Sticker</td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+						<td><span class="cross">✗</span></td>
+					</tr>
+
+					<tr class="section-header">
+						<td colspan="12">Post-print</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Annealing Treatment</td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="tick">✓</span></td>
+						<td><span class="na">N/A</span></td>
+						<td><span class="na">N/A</span></td>
+					</tr>
+
+					<tr class="section-header">
+						<td colspan="12">Recommended Application Scenarios</td>
+					</tr>
+
+					<tr class="data-row">
+						<td>Applications</td>
+						<td>
+							<span class="app-tag">Hobby</span>
+							<span class="app-tag">Creative design</span>
+							<span class="app-tag">Artwork</span>
+						</td>
+						<td>
+							<span class="app-tag">Prototyping</span>
+							<span class="app-tag">Functional parts</span>
+						</td>
+						<td>
+							<span class="app-tag">Prototyping</span>
+							<span class="app-tag">Artwork</span>
+							<span class="app-tag">Consumer product</span>
+						</td>
+						<td>
+							<span class="app-tag">Functional parts</span>
+							<span class="app-tag">Mechanical parts</span>
+							<span class="app-tag">Tooling</span>
+						</td>
+						<td>
+							<span class="app-tag">Mechanical parts</span>
+							<span class="app-tag">Medical devices</span>
+							<span class="app-tag">Containers &amp; packages</span>
+						</td>
+						<td>
+							<span class="app-tag">Containers &amp; packages</span>
+							<span class="app-tag">Medical devices</span>
+						</td>
+						<td>
+							<span class="app-tag">Industrial prototypes</span>
+							<span class="app-tag">Mechanical parts</span>
+							<span class="app-tag">Pipes</span>
+						</td>
+						<td>
+							<span class="app-tag">Functional parts</span>
+							<span class="app-tag">Consumer product</span>
+						</td>
+						<td>
+							<span class="app-tag">Functional parts</span>
+							<span class="app-tag">Artwork</span>
+							<span class="app-tag">Prototyping</span>
+						</td>
+						<td>
+							<span class="app-tag">Lightweight structures</span>
+							<span class="app-tag">Medical devices</span>
+						</td>
+						<td>
+							<span class="app-tag">Functional parts</span>
+							<span class="app-tag">Mechanical parts</span>
+							<span class="app-tag">Medical devices</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p class="scroll-hint">← Scroll horizontally to view all filament types →</p>
+		<p class="scroll-hint">Based on the <a href="https://wiki.flashforge.com/en/filaments_and_accessories/filament">Filament Guide</a> by Flashforge (but with better design and shop links removed - ideal for printing)</p>
+		<p style="text-align: center">Created by <a href="https://github.com/caskexe/">CASK.exe</a></p>
+
+		<script>
+			// Theme switcher
+			function setTheme(theme) {
+				var body = document.body;
+
+				body.classList.remove("theme-lowink");
+
+				if (theme === "lowink") {
+					body.classList.add("theme-lowink");
+				}
+
+				document.getElementById("btn-colour").classList.toggle("active", theme === "colour");
+				document.getElementById("btn-lowink").classList.toggle("active", theme === "lowink");
+			}
+		</script>
+	</body>
+</html>
