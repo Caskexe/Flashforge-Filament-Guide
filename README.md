@@ -2,6 +2,8 @@
 Just a basic HTML page with a 3D printer filament guide (with print options - the paper kind!)
 
 View online [HERE](https://htmlpreview.github.io/?https://github.com/Caskexe/Flashforge-Filament-Guide/blob/main/flashforge_filament_guide.html/).
+
+Download the PDF version [HERE](https://github.com/Caskexe/Flashforge-Filament-Guide/blob/main/flashforge_filament_guide.pdf)
 _____ 
 ### Support Me? <3
 ***Donations are completely unexpected, but incredibly appreciated!***
